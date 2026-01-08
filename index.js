@@ -24,3 +24,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Serveur lancé sur le port ${PORT}`);
 });
+
+app.use(require("./src/middlewares/errorHandler"));
