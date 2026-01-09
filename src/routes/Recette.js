@@ -3,19 +3,20 @@ const router = express.Router();
 const controller = require("../controllers/recetteController");
 const commentController = require("../controllers/commentController");
 const Recette = require("../models/Recette");
+const auth = require("../middlewares/auth");
 
 // Routes CRUD
-router.post("/", controller.ajouter);
+router.post("/", auth, controller.ajouter);
 router.get("/", controller.lireToutes);
 router.get("/:id", controller.lireParId);
 router.put("/:id", controller.modifier);
 router.delete("/:id", controller.supprimer);
 
 // Ajouter un commentaire
-router.post("/recipes/:recipeId/comments", commentController.addComment);
+router.post("/recettes/:recetteId/comments", commentController.addComment);
 
 // Route filtrée avec tri
-router.get("/recipes", async (req, res) => {
+router.get("/recettes", async (req, res) => {
   try {
     const sort = req.query.sort;
     let sortOption = {};

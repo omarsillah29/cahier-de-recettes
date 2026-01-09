@@ -1,0 +1,126 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Cahier de Recettes",
+        "version": "1.0.0",
+        "description": "Documentation de l’API de partage de recettes."
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000"
+        }
+    ],
+    "paths": {
+        "/recettes": {
+            "get": {
+                "summary": "Récupère toutes les recettes",
+                "tags": [
+                    "Recettes"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Liste des recettes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Recette"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Ajoute une nouvelle recette",
+                "tags": [
+                    "Recettes"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Recette"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Recette créée"
+                    }
+                }
+            }
+        },
+        "/recettes/{id}": {
+            "get": {
+                "summary": "Récupère une recette par ID",
+                "tags": [
+                    "Recettes"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Recette trouvée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Recette"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recette non trouvée"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Recette": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string"
+                    },
+                    "titre": {
+                        "type": "string"
+                    },
+                    "ingredients": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "etapes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "auteur": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            }
+        }
+    }
+}

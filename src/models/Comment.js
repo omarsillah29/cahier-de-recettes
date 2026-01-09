@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const commentSchema = new mongoose.Schema({
   recipeId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Recipe",
+    ref: "Recette",
     required: true,
   },
   author: String,
